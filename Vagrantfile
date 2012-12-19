@@ -28,11 +28,15 @@ Vagrant::Config.run do |config|
   # computers to access the VM, whereas host only networking does not.
   config.vm.forward_port 9001,9001
 
+  # This allows symlinks to be created within the /vagrant root directory, 
+  # which is something librarian-puppet needs to be able to do. This might
+  # be enabled by default depending on what version of VirtualBox is used.
+  config.vm.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-moniker", "1"]
+  
   # Share an additional folder to the guest VM. The first argument is
   # an identifier, the second is the path on the guest to mount the
   # folder, and the third is the path on the host to the actual folder.
   # config.vm.share_folder "v-data", "/vagrant_data", "../data"
-  #
   config.vm.share_folder "v-moniker", "/opt/stack/moniker", "../moniker"
 
   # Enable provisioning with Puppet stand alone.  Puppet manifests
