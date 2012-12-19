@@ -4,6 +4,15 @@ package { 'python-pip': }
 package { 'python-virtualenv': }
 package { 'rabbitmq-server': }
 package { 'git': }
+# optional, only needed if you are going to run the bind backend
+package { 'bind9': 
+  # make sure we do an "apt-get update" to refresh the apt repo metadata
+  require => Exec['apt-get update'],
+}
+
+exec { 'apt-get update':
+  path    => ['/usr/bin', '/usr/sbin'],
+}
 
 exec { 'install-python-lxml-deps':
   command => 'apt-get build-dep --yes python-lxml',
@@ -21,7 +30,7 @@ package {'tox': provider => pip }
 # moniker repo on the host as the virtualenv environment relies on symlinks
 # which don't work on vboxfs mounts
 exec { 'setup-moniker-venv':
-  command => 'virtualenv –no-site-packages .venv ; . .venv/bin/activate ; cd /opt/stack/moniker ; pip install -rtools/setup-requires -rtools/pip-requires -rtools/pip-options',
+  command => 'virtualenv .venv ; . .venv/bin/activate ; cd /opt/stack/moniker ; pip install -rtools/setup-requires -rtools/pip-requires -rtools/pip-options',
   cwd     => '/opt/stack',
   path    => ['/usr/bin', '/usr/sbin'],
   require => Exec['install-python-lxml-deps'],
