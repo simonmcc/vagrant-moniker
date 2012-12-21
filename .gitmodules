@@ -1,3 +1,9 @@
 [submodule "puppet/modules/vcsrepo"]
 	path = puppet/modules/vcsrepo
 	url = git://github.com/puppetlabs/puppetlabs-vcsrepo
+[submodule "puppet/modules/moniker"]
+	path = puppet/modules/moniker
+	url = git@github.com:simonmcc/puppet-openstack-moniker.git
+[submodule "puppet/modules/python"]
+	path = puppet/modules/python
+	url = git@github.com:simonmcc/puppet-module-python.git
