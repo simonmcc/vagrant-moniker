@@ -13,3 +13,5 @@ Prototype settingup up a Python virtualenv using puppet:
   https://github.com/uggedal/puppet-module-webapp
   Yay! This supports virtualenv & dependencies via an extrenal file requirements.txt
 
+READING
+* http://news.ycombinator.com/item?id=3879926
